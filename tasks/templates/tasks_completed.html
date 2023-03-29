@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <h1 class="text-center mt-4 mb-4">MetterMap</h1>
+
+  <form action="{% url 'tasks_completed' %}" method="GET">
+    <div class="input-group mb-3">
+        <input type="text" name="name" class="form-control" placeholder="No. medidor" aria-label="No. medidor" aria-describedby="button-addon2" value="{{ name }}">
+        <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        </div>
+    </div>
+</form>
+
+
+  {% if btn %}
+  <div class="row">
+    {% for task in tasks %}
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Medidor: {{ task.Medidor }}</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">Coordenadas: {{ task.Coordenadas }}</p>
+          <a href="https://www.google.com/maps?q={{ task.Coordenadas }}" target="_blank" class="btn btn-primary">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>No se encontraron resultados para "{{ name }}".</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}

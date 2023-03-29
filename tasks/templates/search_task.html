@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <h1 class="text-center mt-4 mb-4">Resultados de la búsqueda</h1>
+
+  <form action="{% url 'search_task' %}" method="GET">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-8">
+          <input type="text" name="search_task" class="form-control" placeholder="Medidor">
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-outline-primary btn-block" type="submit">Buscar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  {% if tasks %}
+  <div class="row">
+    {% for task in tasks %}
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header{% if task.important %} bg-warning text-white{% endif %}">
+          <h5 class="mb-0">Medidor: {{ task.Medidor }}</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">Coordenadas: {{ task.Coordenadas }}</p>
+          <a href="https://www.google.com/maps?q={{ task.Coordenadas }}" target="_blank" class="btn btn-primary">Ver en Google Maps</a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">{{ task.datecompleted|date:'M j Y:i' }}</small>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="mt-4">No se encontraron tareas que coincidan con el término de búsqueda.</p>
+  {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">GerLay</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a href="/" class="nav-link{% if request.path == '/' %} active{% endif %}">Home</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{% url 'tasks_completed' %}" class="nav-link{% if request.path == '/tasks-completed/' %} active{% endif %}">Buscar medidor</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'tasks' %}" class="nav-link{% if request.path == '/tasks/' %} active{% endif %}"></a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'create_task' %}" class="nav-link{% if request.path == '/create-task/' %} active{% endif %}">Agregar medidor</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a href="/signin" class="nav-link{% if request.path == '/signin/' %} active{% endif %}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a href="/signup" class="nav-link{% if request.path == '/signup/' %} active{% endif %}">Register</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

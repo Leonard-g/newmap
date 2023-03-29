@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+
+
+  {% for task in tasks %}
+  <div class="card">
+    <div class="card-header{% if task.important %} bg-warning text-white{% endif %}">
+      <h5 class="mb-0">{{ task.Medidor }}</h5>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ task.Coordenadas }}</p>
+      <a href="https://www.google.com/maps?q={{ task.Coordenadas }}" target="_blank" class="btn btn-primary">Ver en Google Maps</a>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">{{ task.datecompleted|date:'M j Y:i' }}</small>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+{% endblock %}
